@@ -1,0 +1,27 @@
+def caesar_cipher(text, shift, mode='encrypt'):
+    result = ""
+
+    # Reverse shift for decryption
+    if mode == 'decrypt':
+        shift = -shift
+
+    for char in text:
+        if char.isalpha():  # Only shift letters
+            base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            result += char  # Leave other characters unchanged
+
+    return result
+
+# Test the program
+text = "ATTACKATONCE"
+shift = 4
+
+encrypted = caesar_cipher(text, shift, 'encrypt')
+decrypted = caesar_cipher(encrypted, shift, 'decrypt')
+
+print("Original Text : ", text)
+print("Shift Value   : ", shift)
+print("Encrypted Text: ", encrypted)
+print("Decrypted Text: ", decrypted)

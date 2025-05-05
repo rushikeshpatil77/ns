@@ -1,0 +1,17 @@
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad, unpad
+import binascii
+
+key = b'01234567'
+data = b'Hello123'  # Use for encryption
+encrypted_hex = b'fa261aa82543a8d608bb5db6b37c06d7'  # Paste your actual output here for decryption
+
+# --- Encryption ---
+cipher = DES.new(key, DES.MODE_ECB)
+encrypted = cipher.encrypt(pad(data, 8))
+print("Encrypted:", binascii.hexlify(encrypted).decode())
+
+# --- Decryption ---
+cipher = DES.new(key, DES.MODE_ECB)
+decrypted = unpad(cipher.decrypt(binascii.unhexlify(encrypted_hex)), 8)
+print("Decrypted:", decrypted.decode())
